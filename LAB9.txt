@@ -1,0 +1,132 @@
+MongoDB shell version v5.0.5
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("741038ba-2ee1-4d8b-ba30-666fa4cbbb56") }
+MongoDB server version: 6.0.3
+WARNING: shell and server versions do not match
+================
+
+SHOW DATABASES
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+CREATE DATABASE
+
+> use lab9
+switched to db lab9
+
+CREATE AND VIEW COLLECTION
+
+> db.createCollection("student");
+{ "ok" : 1 }
+> db.student.insertMany([{name:"Awantika Saha",rollno:2247243,age:21},{name:"Ronak Prasad",rollno:2247232,age:22}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("63b3ad0656fec37a1848ffc4"),
+                ObjectId("63b3ad0656fec37a1848ffc5")
+        ]
+}
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("63b3ad0656fec37a1848ffc4"),
+        "name" : "Mohit Mehta",
+        "rollno" : 2247267,
+        "age" : 21
+}
+{
+        "_id" : ObjectId("63b3ad0656fec37a1848ffc5"),
+        "name" : "Ronak Prasad",
+        "rollno" : 2247232,
+        "age" : 22
+} 
+> db.student.insertMany([{name:"Awantika Saha",rollno:2247243,age:21},{name:"Apoorva Vasistha",rollno:2247240,age:21},{name:"Prajwal",rollno:2247266,age:21}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("63b3aee656fec37a1848ffc6"),
+                ObjectId("63b3aee656fec37a1848ffc7"),
+                ObjectId("63b3aee656fec37a1848ffc8")
+        ]
+}
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("63b3ad0656fec37a1848ffc4"),
+        "name" : "Mohit Mehta",
+        "rollno" : 2247267,
+        "age" : 21
+}
+{
+        "_id" : ObjectId("63b3ad0656fec37a1848ffc5"),
+        "name" : "Ronak Prasad",
+        "rollno" : 2247232,
+        "age" : 22
+}
+{
+        "_id" : ObjectId("63b3aee656fec37a1848ffc6"),
+        "name" : "Awantika Saha",
+        "rollno" : 2247243,
+        "age" : 21
+}
+{
+        "_id" : ObjectId("63b3aee656fec37a1848ffc7"),
+        "name" : "Apoorva Vasistha",
+        "rollno" : 2247240,
+        "age" : 21
+}
+{
+        "_id" : ObjectId("63b3aee656fec37a1848ffc8"),
+        "name" : "Prajwal",
+        "rollno" : 2247266,
+        "age" : 21
+}
+
+UPDATE AND VIEW COLLECTION
+
+> db.student.updateOne({name:"Mohit Mehta"},{$set:{age:22}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+> db.student.find({rollno:2247267})
+{ "_id" : ObjectId("63b3ad0656fec37a1848ffc4"), "name" : "Mohit Mehta", "rollno" : 2247267, "age" : 22 }
+
+> db.student.find({rollno:2247267}).pretty()
+{
+        "_id" : ObjectId("63b3ad0656fec37a1848ffc4"),
+        "name" : "Mohit Mehta",
+        "rollno" : 2247267,
+        "age" : 22
+}
+
+DELETE AND VIEW COLLECTION
+
+> db.student.deleteOne({name:"Mohit Mehta"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("63b3ad0656fec37a1848ffc5"),
+        "name" : "Ronak Prasad",
+        "rollno" : 2247232,
+        "age" : 22
+}
+{
+        "_id" : ObjectId("63b3aee656fec37a1848ffc6"),
+        "name" : "Awantika Saha",
+        "rollno" : 2247243,
+        "age" : 21
+}
+{
+        "_id" : ObjectId("63b3aee656fec37a1848ffc7"),
+        "name" : "Apoorva Vasistha",
+        "rollno" : 2247240,
+        "age" : 21
+}
+{
+        "_id" : ObjectId("63b3aee656fec37a1848ffc8"),
+        "name" : "Prajwal",
+        "rollno" : 2247266,
+        "age" : 21
+}
+>
